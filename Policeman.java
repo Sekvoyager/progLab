@@ -5,7 +5,8 @@ public class Policeman extends Citizen {
     public enum Rank{
         commissar, assistant
     }
-    public Policeman(String name, boolean hairless, Location Current_Location, Location CrimetimeLocation, Location HomeLocation, Feeling CurrentFeeling, Rank rank) {
+    public Policeman(String name, boolean hairless, Location Current_Location, Location CrimetimeLocation, 
+                     Location HomeLocation, Feeling CurrentFeeling, Rank rank) {
         super(name, hairless, Current_Location, CrimetimeLocation, HomeLocation, CurrentFeeling);
         this.rank = rank;
     }
