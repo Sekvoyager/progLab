@@ -1,0 +1,10 @@
+String;
+
+public class Location {
+    String housename;
+    Citizen owner;
+    Location(Citizen owner, String housename){
+        owner = this.owner;
+        housename = this.housename;
+    }
+}
