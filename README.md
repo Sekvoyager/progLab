@@ -7,7 +7,7 @@ labwork#3:
 2. Policeman now can order to take off a hat
 3. Citizen can take off a hat
 4. Policeman can try to tear off hair
-5. Citizen now have patience and "wearsWig"
+5+. Citizen now have patience
 6. Invitation process has changed
 7. Policeman now has specialty (arresting or interrogating)
 8. Now policeman must check, if citizen isn't a policeman
