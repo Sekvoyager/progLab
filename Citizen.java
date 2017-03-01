@@ -1,28 +1,38 @@
-import java
+interface Letter{
+    void writeFilthMessage();
+}
 
-public class Citizen{
+interface Rob{
+    void robTheBank();
+}
+
+public class Citizen implements Letter, Rob{
     static Citizen[] Ctz = new Citizen[6];
     static Policeman[] allPlc = new Policeman[5];
     boolean hairless;
     String name;
+    boolean Patience; //терпение жителя при проверке
     Location Current_Location, CrimetimeLocation, HomeLocation;
     Feeling Current_Feeling;
     public enum Location{
         Home1, Home2, Home3, Home4, Home5, Home6, Pshhouse, Dighouse, Gighouse, Spighouse, Psihouse, Jail,
-            PoliceOffice, Bank
+        PoliceOffice, Bank
     }
     public enum Feeling{
         Happy, Unhappy, Wary, Terrible, Tired
     }
+
     Citizen(String name, boolean hairless, Location Current_Location, Location CrimetimeLocation,
-            Location HomeLocation, Feeling CurrentFeeling) {
+            Location HomeLocation, Feeling CurrentFeeling, boolean Patience) {
         this.name = name;
         this.hairless = hairless;
         this.Current_Location = Current_Location;
         this.CrimetimeLocation = CrimetimeLocation;
         this.HomeLocation = HomeLocation;
         this.Current_Feeling = CurrentFeeling;
+        this.Patience = Patience;
     }
+
     public void robTheBank(){
         CrimetimeLocation = Location.Bank;
         Current_Feeling = Feeling.Wary;
@@ -46,6 +56,9 @@ public class Citizen{
         System.out.println(this.name + " hasn't able to prove his alibi");
         return false;
     }
+    public void takeOffHat(){
+        System.out.println(this.name + " took off his hat.");
+    }
     public static void main(String args[]){
         allPlc[0] = new Policeman("Pshiggle", false, Location.PoliceOffice,
                 Location.PoliceOffice, Location.Pshhouse, Feeling.Tired, Policeman.Rank.commissar);
@@ -57,17 +70,20 @@ public class Citizen{
                 Location.PoliceOffice, Location.Spighouse, Feeling.Tired, Policeman.Rank.assistant);
         allPlc[4] = new Policeman("Psiggle", false, Location.PoliceOffice,
                 Location.PoliceOffice, Location.Psihouse, Feeling.Tired, Policeman.Rank.assistant);
-        Ctz[0] = new Citizen("Francis", true, Location.Home1, Location.Home2, Location.Home1, Feeling.Happy);
-        Ctz[1] = new Citizen("Muhammad", false, Location.Home2, Location.Home1, Location.Home2, Feeling.Happy);
-        Ctz[2] = new Citizen("Andrew", true, Location.Home3, Location.Home1, Location.Home3, Feeling.Happy);
-        Ctz[3] = new Citizen("Donald", true, Location.Home2, Location.Home3, Location.Home4, Feeling.Happy);
-        Ctz[4] = new Citizen("Kim", true, Location.Home6, Location.Home3, Location.Home5, Feeling.Happy);
-        Ctz[5] = new Citizen("Felix", true, Location.Home6, Location.Home5, Location.Home6, Feeling.Happy);
-        Ctz[2].writeFilthMessage();
+        Ctz[0] = new Citizen("Francis", true, Location.Home1, Location.Home2, Location.Home1, Feeling.Happy, true);
+        Ctz[1] = new Citizen("Muhammad", false, Location.Home2, Location.Home1, Location.Home2, Feeling.Happy, false);
+        Ctz[2] = new Citizen("Andrew", true, Location.Home3, Location.Home1, Location.Home3, Feeling.Happy, true);
+        Ctz[3] = new Citizen("Donald", true, Location.Home2, Location.Home3, Location.Home4, Feeling.Happy, false);
+        Ctz[4] = new Citizen("Kim", true, Location.Home6, Location.Home3, Location.Home5, Feeling.Happy, false);
+        Ctz[5] = new Citizen("Felix", true, Location.Home6, Location.Home5, Location.Home6, Feeling.Happy, true);
+        allPlc[2].writeFilthMessage();
         Ctz[5].robTheBank();
         int cop = 0, cz = 0;
         while (cz < 6) {
-            if (allPlc[cop].interrogate(Ctz[cz])) {
+            allPlc[cop].orderToTakeOff(Ctz[cz]);
+            if (allPlc[cop].tearOffHair(Ctz[cz])) {
+                allPlc[cop].bringToInterrogation(Ctz[cz]);
+                allPlc[cop].interrogate(Ctz[cz]);
                 if (cop == 4) {
                     cop = 0;
                 }
@@ -79,5 +95,3 @@ public class Citizen{
         }
     }
 }
-
-
