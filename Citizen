@@ -1,0 +1,120 @@
+import java.lang.String;
+import java.util.Scanner;
+import java.util.Vector;
+
+public class Citizen{
+    static Citizen[] Ctz = new Citizen[6];
+    static Policeman[] allPlc = new Policeman[5];
+    boolean hairless;
+    String name;
+    Location Current_Location, CrimetimeLocation, HomeLocation;
+    Feeling Current_Feeling;
+
+    public enum Feeling{
+        Happy, Unhappy, Wary, Terrible, Tired
+    }
+    public enum Proffesion{
+        Police, Citizen
+    }
+    Citizen(String name, boolean hairless, Location Current_Location, Location CrimetimeLocation,
+            Location HomeLocation, Feeling CurrentFeeling) {
+        this.name = name;
+        this.hairless = hairless;
+        this.Current_Location = Current_Location;
+        this.CrimetimeLocation = CrimetimeLocation;
+        this.HomeLocation = HomeLocation;
+        this.Current_Feeling = CurrentFeeling;
+    }
+    public void robTheBank(){
+        CrimetimeLocation = Location.Bank;
+        Current_Feeling = Feeling.Wary;
+        System.out.println(this.name + " has robbed a bank!O_O");
+    }
+    public void writeFilthMessage(){
+        Current_Feeling = Feeling.Wary;
+        System.out.println(this.name + " has wrote a filth message");
+    }
+    public void beInterrogated(){
+        this.Current_Feeling = Feeling.Unhappy;
+        this.Current_Location = Location.PoliceOffice;
+    }
+    public void iLiveHere(){
+        HomeLocation = new Location(this, Location.toString());
+    }
+    public boolean proveAlibi(){
+        for (int i = 0; i < 6; i++) {
+            if (!(Ctz[i].name.equals(this.name)) && (Ctz[i].CrimetimeLocation.equals(this.CrimetimeLocation))){
+                System.out.println(Ctz[i].name + " proved that " + this.name + " was at " + this.CrimetimeLocation);
+                return true;
+            }
+        }
+        System.out.println(this.name + " hasn't able to prove his alibi");
+        return false;
+    }
+
+    public static void inputAMan(){
+        Vector Ctz = new Vector();
+        Scanner inter = new Scanner(System.in);
+        String inp = new String(" ");
+        String hrl = new String();
+        inp = inter.nextLine();
+        String[] inpMas = new String[11];
+        inpMas = inp.split(" ");
+
+        boolean isHairless;
+        Proffesion prof;
+        Location homloc;
+        Location ctloc;
+        String hm;
+
+        if (inpMas[1].equals("policeman")) {
+            Ctz.add(new Policeman(inpMas[2], true, ));
+        }
+        else {
+            prof = Proffesion.Citizen;
+        }
+
+        if (inpMas[0].equals("hairless")){
+            isHairless = true;
+        }
+        else {
+            isHairless = false;
+        }
+            new Location()
+
+
+        if (inpMas[1].equals("policeman")){
+            if (inpMas[2].equals("Pshiggle")){
+
+            }
+        }
+    }
+
+    public static void main(String args[]){
+        new Location(null, "Bank");
+        new Location(null, "PoliceOffice");
+        new Location(null, "Jail");
+        new Location(null, "Street");
+        System.out.println("In the moment of crime...");
+
+        while(!inp.equals("So...")){
+
+        }
+
+
+        int cop = 0, cz = 0;
+        while (cz < 6) {
+            if (allPlc[cop].interrogate(Ctz[cz])) {
+                if (cop == 4) {
+                    cop = 0;
+                }
+                else {
+                    cop++;
+                }
+            }
+            cz++;
+        }
+    }
+}
+
+
